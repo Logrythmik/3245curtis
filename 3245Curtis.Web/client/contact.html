@@ -1,0 +1,59 @@
+﻿
+<div class="row">
+    <div class="span3">
+        <h2>Address:</h2>
+        <p>
+            134 West Ellsworth Avenue<br />
+            Denver, CO<br />
+            80223
+        </p>
+        <div style="width:200px;height:200px"><iframe width="200" height="200" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/maps?q=134+W+Ellsworth+Ave,+Denver,+CO&hl=en&sll=39.764339,-104.855111&sspn=0.452863,0.551376&oq=134+w&t=h&hnear=134+W+Ellsworth+Ave,+Denver,+Colorado+80223&z=17&iwloc=A&output=embed"></iframe><br><table width="200" cellpadding="0" cellspacing="0" border="0"><tr><td align="left"><small><a href="http://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=London@51.508129,-0.128005&ie=UTF8&z=12&t=m&iwloc=near">View Larger Map</a></small></td><td align="right"><small></small></td></tr></table></div><br /><br />
+        <h3>Telephone:</h3>
+        <p><a href="tel:3037326426">(303) 732-6426</a></p>
+    </div>
+    <div class="span9">
+        <div class="page-header">
+            <h1>Contact us</h1>
+            <div ng-show="sent" class="alert alert-block alert-success">
+                Your message has been sent! Thanks for the inquiry.
+            </div>
+            <div ng-show="message" class="alert alert-block alert-error">
+                An error occurred: {{message}}
+            </div>
+        </div>
+        <!-- Headings & Paragraph Copy -->
+        <div class="row">
+            
+            <div class="span9">
+                <form class="form-horizontal" id="form" ng-submit="send()">
+                    <fieldset>
+                        <p>Send an inquiry using the contact form below</p><br />
+                        <div class="control-group">
+                            <label for="focusedInput" class="control-label"> Name:</label>
+                            <div class="controls">
+                                <input type="text" ng-model="contact.name" required="" placeholder="your name" id="focusedInput" class="input-xlarge focused span6">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">E-Mail Address:</label>
+                            <div class="controls">
+                                <input type="email" required="" ng-model="contact.email" placeholder="your email" class="input-xlarge span6">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label for="textarea" class="control-label">Inquiry:</label>
+                            <div class="controls">
+                                <textarea rows="3" required="" id="textarea" ng-model="contact.inquiry" 
+                                          placeholder="What questions do you have?" class="input-xlarge span6"></textarea>
+                            </div>
+                        </div>
+                        <div class="span8">
+                            <button class="btn btn-primary pull-right" style="margin-right: 20px;" type="submit">Continue</button>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+
+        </div><!-- /row -->
+    </div>
+</div>

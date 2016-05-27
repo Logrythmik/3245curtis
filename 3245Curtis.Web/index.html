@@ -1,0 +1,159 @@
+﻿<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="utf-8">
+    <title>3245 Curtis St : Curtis Park</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Le styles -->
+    <link href="/client/css/bootstrap.css" rel="stylesheet">
+    <link href="/client/css/main.css" rel="stylesheet" />
+    <link href="/client/css/jquery.css" rel="stylesheet">
+    
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+    <div class="container main">
+        <!-- Start Header-->
+        <div class="row">
+            <div class="span4 logo">
+                <a href="home">
+                    <h1 class="logo-title">3245 Curtis St</h1>
+                </a>
+                <span class="slogan">The Baker, at its best.</span>
+            </div>
+            <div class="span8">
+                <div class="row">
+                    <div class="span8 customer_service">
+                        <h4><small>To schedule a viewing, call: <strong>(303) 513-1374</strong></small></h4>
+                    </div>
+                </div>
+                <div class="span8">
+                    <h2 style="text-align: right; margin-right: 20px">$370,000</h2>
+                </div>
+            </div>
+        </div>
+        <!-- End Header-->
+        <!-- Start Navigation -->
+        <div class="row">
+            <div class="span12">
+                <div class="navbar">
+                    <div class="navbar-inner">
+                        <div class="container" style="width: auto;">
+                            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </a>
+                            <div class="nav-collapse">
+                                <ul class="nav pull-right">
+                                    <li><a href="home">Home</a></li>
+                                    <li><a href="photos">More Photos</a></li>
+                                    <li><a href="contact">Contact</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr />
+            </div>
+        </div>
+        <!-- End Navigation -->
+        <div ui-view></div>
+
+        <footer>
+            <hr>
+            <div class="row">
+                <div class="span3">
+                    <h4>Contact Info</h4>
+                    <p>
+                        E: <a href="mailto:baker@jasonwicker.com">baker@jasonwicker.com</a> <br />
+                        T: <a href="tel:3037326426">(303) 513-1374</a>
+                    </p>
+                </div>
+                <div class="span3">
+                    <h4>Quick Navigation</h4>
+                    <ul>
+                        <li><a href="photos">Photos</a></li>
+                        <li><a href="contact">Contact us</a></li>
+                    </ul>
+                </div>
+                <div class="span6">
+                    <h4>See it on Zillow:</h4>
+                    <br />
+                    <a href="//www.zillow.com/homedetails/134-W-Ellsworth-Ave-Denver-CO-80223/13344418_zpid/" target="_blank">
+                        <img height="30px" src="//filecache.drivetheweb.com/mr4enh_zillow/1738/zillow_logo_RGB_2500px.jpg" />
+                    </a>
+
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script src="/client/js/jquery.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.js"></script>
+    <script type="text/javascript">
+        angular
+            .module('app', ['ui.router'])
+            .config(function ($stateProvider, $httpProvider, $urlRouterProvider, $locationProvider) {
+                $locationProvider.html5Mode(true).hashPrefix('!');
+
+                $stateProvider
+                    .state('home', {
+                        url: '/-/home',
+                        templateUrl: '/client/home.html',
+                        controller: function ($scope, $state) {
+
+                        }
+                    })
+                    .state('about', {
+                        url: '/-/about',
+                        templateUrl: '/client/about.html',
+                        controller: function ($scope, $state) {
+
+                        }
+                    })
+                    .state('photos', {
+                        url: '/-/photos',
+                        templateUrl: '/client/photos.html',
+                        controller: function ($scope, $state) {
+
+                        }
+                    })
+                    .state('contact', {
+                        url: '/-/contact',
+                        templateUrl: '/client/contact.html',
+                        controller: function ($scope, $state, $http) {
+                            $scope.contact = {
+                                name: '', email: '', inquiry: ''
+                            };
+                            $scope.send = function () {
+                                $http.post('/api/contact', $scope.contact).then(
+                                    function () {
+                                        $scope.contact = {
+                                            name: '',
+                                            email: '',
+                                            inquiry: ''
+                                        };
+                                        $scope.sent = true;
+                                        $scope.message = '';
+                                    },
+                                    function (response) {
+                                        $scope.message = response.data.Message;
+                                    }
+                                );
+                            }
+                        }
+                    });
+
+                $urlRouterProvider.otherwise('/-/home');
+
+            });
+    </script>
+</body>
+</html>
